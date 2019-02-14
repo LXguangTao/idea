@@ -1,0 +1,904 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="bigideaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Advices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Subhead" Type="varchar" MaxLength="100" />
+          <Property Name="PicUrl" Type="varchar" MaxLength="50" />
+          <Property Name="Daoyan" Type="varchar" MaxLength="500" />
+          <Property Name="CoverStory" Type="varchar" MaxLength="500" />
+          <Property Name="Dinting" Type="varchar" MaxLength="500" />
+          <Property Name="Snakes" Type="varchar" MaxLength="500" />
+          <Property Name="Arbitrary" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tags" Type="varchar" MaxLength="50" />
+          <Property Name="Trade" Type="varchar" MaxLength="50" />
+          <Property Name="Area" Type="varchar" MaxLength="50" />
+          <Property Name="Type" Type="varchar" MaxLength="20" />
+          <Property Name="Media" Type="varchar" MaxLength="20" />
+          <Property Name="Author" Type="varchar" MaxLength="20" />
+          <Property Name="Agency" Type="varchar" MaxLength="50" />
+          <Property Name="MainPicUrl" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Cont" Type="varchar" MaxLength="8000" Nullable="false" />
+          <Property Name="Research" Type="varchar" MaxLength="20" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="PubTime" Type="datetime" />
+          <Property Name="ReadTimes" Type="int" />
+        </EntityType>
+        <EntityType Name="Collect">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArticleId" Type="int" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArticleId" Type="int" />
+          <Property Name="Cont" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="CommentTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Photos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PicUrl" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ArticleId" Type="int" />
+        </EntityType>
+        <EntityType Name="Radios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RadioUrl" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cont" Type="varchar" MaxLength="50" />
+          <Property Name="ArticleId" Type="int" />
+        </EntityType>
+        <EntityType Name="ReArticle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArticleId" Type="int" Nullable="false" />
+          <Property Name="PosId" Type="int" />
+          <Property Name="Weight" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Note" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="RoleGive">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="RoleId" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Passward" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Sex" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="NickName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="HeadSculpture" Type="varchar" MaxLength="50" />
+          <Property Name="SelfSInfo" Type="varchar" MaxLength="100" />
+          <Property Name="HeadPicUrl" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="40" />
+          <Property Name="LastLoginTime" Type="datetime" />
+          <Property Name="IsDel" Type="char" MaxLength="1" />
+          <Property Name="IsStop" Type="char" MaxLength="2" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“bigidea.dbo.View_Collect”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="View_Collect">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="MainPicUrl" />
+            <PropertyRef Name="ArticleId" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Author" Type="varchar" MaxLength="20" />
+          <Property Name="Agency" Type="varchar" MaxLength="50" />
+          <Property Name="MainPicUrl" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ReadTimes" Type="int" />
+          <Property Name="ArticleId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“bigidea.dbo.View_Comment”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="View_Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="comId" />
+            <PropertyRef Name="Cont" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="comId" Type="int" Nullable="false" />
+          <Property Name="Cont" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CommentTime" Type="datetime" />
+          <Property Name="HeadPicUrl" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“bigidea.dbo.View_Rec”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="View_Rec">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="MainPicUrl" />
+          </Key>
+          <Property Name="PosId" Type="int" />
+          <Property Name="Weight" Type="int" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MainPicUrl" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Author" Type="varchar" MaxLength="20" />
+          <Property Name="Agency" Type="varchar" MaxLength="50" />
+          <Property Name="ReadTimes" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“bigidea.dbo.View_User”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="View_User">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="RoleName" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Note" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__Collect__Article__21B6055D">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="Collect" Type="Self.Collect" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collect">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Collect__UserId__22AA2996">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Collect" Type="Self.Collect" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collect">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__Article__1BFD2C07">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__UserId__1CF15040">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Photos__ArticleI__0EA330E9">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="Photos" Type="Self.Photos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photos">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Radios__ArticleI__1367E606">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="Radios" Type="Self.Radios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Radios">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RoleGive__RoleId__276EDEB3">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="RoleGive" Type="Self.RoleGive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleGive">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RoleGive__UserId__286302EC">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="RoleGive" Type="Self.RoleGive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleGive">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bigideaModelStoreContainer">
+          <EntitySet Name="Advices" EntityType="Self.Advices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Collect" EntityType="Self.Collect" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photos" EntityType="Self.Photos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Radios" EntityType="Self.Radios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReArticle" EntityType="Self.ReArticle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleGive" EntityType="Self.RoleGive" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_Collect" EntityType="Self.View_Collect" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_Collect].[Id] AS [Id], 
+    [View_Collect].[Title] AS [Title], 
+    [View_Collect].[UserName] AS [UserName], 
+    [View_Collect].[Author] AS [Author], 
+    [View_Collect].[Agency] AS [Agency], 
+    [View_Collect].[MainPicUrl] AS [MainPicUrl], 
+    [View_Collect].[ReadTimes] AS [ReadTimes], 
+    [View_Collect].[ArticleId] AS [ArticleId]
+    FROM [dbo].[View_Collect] AS [View_Collect]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_Comment" EntityType="Self.View_Comment" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_Comment].[Id] AS [Id], 
+    [View_Comment].[Title] AS [Title], 
+    [View_Comment].[comId] AS [comId], 
+    [View_Comment].[Cont] AS [Cont], 
+    [View_Comment].[UserName] AS [UserName], 
+    [View_Comment].[CommentTime] AS [CommentTime], 
+    [View_Comment].[HeadPicUrl] AS [HeadPicUrl]
+    FROM [dbo].[View_Comment] AS [View_Comment]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_Rec" EntityType="Self.View_Rec" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_Rec].[PosId] AS [PosId], 
+    [View_Rec].[Weight] AS [Weight], 
+    [View_Rec].[Id] AS [Id], 
+    [View_Rec].[Title] AS [Title], 
+    [View_Rec].[MainPicUrl] AS [MainPicUrl], 
+    [View_Rec].[Author] AS [Author], 
+    [View_Rec].[Agency] AS [Agency], 
+    [View_Rec].[ReadTimes] AS [ReadTimes]
+    FROM [dbo].[View_Rec] AS [View_Rec]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_User" EntityType="Self.View_User" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_User].[Id] AS [Id], 
+    [View_User].[UserName] AS [UserName], 
+    [View_User].[RoleName] AS [RoleName], 
+    [View_User].[Note] AS [Note]
+    FROM [dbo].[View_User] AS [View_User]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Collect__Article__21B6055D" Association="Self.FK__Collect__Article__21B6055D">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="Collect" EntitySet="Collect" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Collect__UserId__22AA2996" Association="Self.FK__Collect__UserId__22AA2996">
+            <End Role="User" EntitySet="User" />
+            <End Role="Collect" EntitySet="Collect" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__Article__1BFD2C07" Association="Self.FK__Comment__Article__1BFD2C07">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__UserId__1CF15040" Association="Self.FK__Comment__UserId__1CF15040">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Photos__ArticleI__0EA330E9" Association="Self.FK__Photos__ArticleI__0EA330E9">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="Photos" EntitySet="Photos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Radios__ArticleI__1367E606" Association="Self.FK__Radios__ArticleI__1367E606">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="Radios" EntitySet="Radios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RoleGive__RoleId__276EDEB3" Association="Self.FK__RoleGive__RoleId__276EDEB3">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="RoleGive" EntitySet="RoleGive" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RoleGive__UserId__286302EC" Association="Self.FK__RoleGive__UserId__286302EC">
+            <End Role="User" EntitySet="User" />
+            <End Role="RoleGive" EntitySet="RoleGive" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bigideaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Advices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PicUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CoverStory" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Dinting" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Snakes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Arbitrary" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Subhead" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Daoyan" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tags" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Trade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Area" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Media" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Author" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Agency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MainPicUrl" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cont" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Research" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="PubTime" Type="DateTime" Precision="3" />
+          <Property Name="ReadTimes" Type="Int32" />
+          <NavigationProperty Name="Collect" Relationship="Self.FK__Collect__Article__21B6055D" FromRole="Article" ToRole="Collect" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK__Comment__Article__1BFD2C07" FromRole="Article" ToRole="Comment" />
+          <NavigationProperty Name="Photos" Relationship="Self.FK__Photos__ArticleI__0EA330E9" FromRole="Article" ToRole="Photos" />
+          <NavigationProperty Name="Radios" Relationship="Self.FK__Radios__ArticleI__1367E606" FromRole="Article" ToRole="Radios" />
+        </EntityType>
+        <EntityType Name="Collect">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArticleId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Article" Relationship="Self.FK__Collect__Article__21B6055D" FromRole="Collect" ToRole="Article" />
+          <NavigationProperty Name="User" Relationship="bigideaModel.FK__Collect__UserId__22AA2996" FromRole="Collect" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArticleId" Type="Int32" />
+          <Property Name="Cont" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Article" Relationship="Self.FK__Comment__Article__1BFD2C07" FromRole="Comment" ToRole="Article" />
+          <NavigationProperty Name="User" Relationship="bigideaModel.FK__Comment__UserId__1CF15040" FromRole="Comment" ToRole="User" />
+          <Property Name="CommentTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Photos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PicUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ArticleId" Type="Int32" />
+          <NavigationProperty Name="Article" Relationship="Self.FK__Photos__ArticleI__0EA330E9" FromRole="Photos" ToRole="Article" />
+        </EntityType>
+        <EntityType Name="Radios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RadioUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cont" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ArticleId" Type="Int32" />
+          <NavigationProperty Name="Article" Relationship="Self.FK__Radios__ArticleI__1367E606" FromRole="Radios" ToRole="Article" />
+        </EntityType>
+        <EntityType Name="ReArticle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArticleId" Type="Int32" Nullable="false" />
+          <Property Name="PosId" Type="Int32" />
+          <Property Name="Weight" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__Collect__Article__21B6055D">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="Collect" Type="Self.Collect" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collect">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__Article__1BFD2C07">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Photos__ArticleI__0EA330E9">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="Photos" Type="Self.Photos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photos">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Radios__ArticleI__1367E606">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="Radios" Type="Self.Radios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Radios">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bigideaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Advices" EntityType="Self.Advices" />
+          <EntitySet Name="Article" EntityType="Self.Article" />
+          <EntitySet Name="Collect" EntityType="Self.Collect" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" />
+          <EntitySet Name="Photos" EntityType="Self.Photos" />
+          <EntitySet Name="Radios" EntityType="Self.Radios" />
+          <EntitySet Name="ReArticle" EntityType="Self.ReArticle" />
+          <AssociationSet Name="FK__Collect__Article__21B6055D" Association="Self.FK__Collect__Article__21B6055D">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="Collect" EntitySet="Collect" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__Article__1BFD2C07" Association="Self.FK__Comment__Article__1BFD2C07">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Photos__ArticleI__0EA330E9" Association="Self.FK__Photos__ArticleI__0EA330E9">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="Photos" EntitySet="Photos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Radios__ArticleI__1367E606" Association="Self.FK__Radios__ArticleI__1367E606">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="Radios" EntitySet="Radios" />
+          </AssociationSet>
+          <EntitySet Name="View_Comment" EntityType="bigideaModel.View_Comment" />
+          <EntitySet Name="View_Collect" EntityType="bigideaModel.View_Collect" />
+          <EntitySet Name="RoleGive" EntityType="bigideaModel.RoleGive" />
+          <EntitySet Name="View_User" EntityType="bigideaModel.View_User" />
+          <EntitySet Name="User" EntityType="bigideaModel.User" />
+          <AssociationSet Name="FK__Collect__UserId__22AA2996" Association="bigideaModel.FK__Collect__UserId__22AA2996">
+            <End Role="User" EntitySet="User" />
+            <End Role="Collect" EntitySet="Collect" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__UserId__1CF15040" Association="bigideaModel.FK__Comment__UserId__1CF15040">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RoleGive__UserId__4CA06362" Association="bigideaModel.FK__RoleGive__UserId__4CA06362">
+            <End Role="User" EntitySet="User" />
+            <End Role="RoleGive" EntitySet="RoleGive" />
+          </AssociationSet>
+          <EntitySet Name="Role" EntityType="bigideaModel.Role" />
+          <AssociationSet Name="FK__RoleGive__RoleId__4D94879B" Association="bigideaModel.FK__RoleGive__RoleId__4D94879B">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="RoleGive" EntitySet="RoleGive" />
+          </AssociationSet>
+          <EntitySet Name="View_Rec" EntityType="bigideaModel.View_Rec" />
+        </EntityContainer>
+        <EntityType Name="View_Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="comId" />
+            <PropertyRef Name="Cont" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="comId" Type="Int32" Nullable="false" />
+          <Property Name="Cont" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CommentTime" Type="DateTime" Precision="3" />
+          <Property Name="HeadPicUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="View_Collect">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="MainPicUrl" />
+            <PropertyRef Name="ArticleId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Author" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Agency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MainPicUrl" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="ReadTimes" Type="Int32" />
+          <Property Name="ArticleId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleGive">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="bigideaModel.FK__RoleGive__UserId__4CA06362" FromRole="RoleGive" ToRole="User" />
+          <NavigationProperty Name="Role" Relationship="bigideaModel.FK__RoleGive__RoleId__4D94879B" FromRole="RoleGive" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="View_User">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="RoleName" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Passward" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NickName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HeadSculpture" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SelfSInfo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="HeadPicUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="LastLoginTime" Type="DateTime" Precision="3" />
+          <Property Name="IsDel" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IsStop" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Collect" Relationship="bigideaModel.FK__Collect__UserId__22AA2996" FromRole="User" ToRole="Collect" />
+          <NavigationProperty Name="Comment" Relationship="bigideaModel.FK__Comment__UserId__1CF15040" FromRole="User" ToRole="Comment" />
+          <NavigationProperty Name="RoleGive" Relationship="bigideaModel.FK__RoleGive__UserId__4CA06362" FromRole="User" ToRole="RoleGive" />
+        </EntityType>
+        <Association Name="FK__Collect__UserId__22AA2996">
+          <End Type="bigideaModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="bigideaModel.Collect" Role="Collect" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collect">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__UserId__1CF15040">
+          <End Type="bigideaModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="bigideaModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RoleGive__UserId__4CA06362">
+          <End Type="bigideaModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="bigideaModel.RoleGive" Role="RoleGive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleGive">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RoleGive" Relationship="bigideaModel.FK__RoleGive__RoleId__4D94879B" FromRole="Role" ToRole="RoleGive" />
+        </EntityType>
+        <Association Name="FK__RoleGive__RoleId__4D94879B">
+          <End Type="bigideaModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="bigideaModel.RoleGive" Role="RoleGive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleGive">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="View_Rec">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="MainPicUrl" />
+          </Key>
+          <Property Name="PosId" Type="Int32" />
+          <Property Name="Weight" Type="Int32" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MainPicUrl" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Author" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Agency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReadTimes" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bigideaModelStoreContainer" CdmEntityContainer="bigideaEntities">
+          <EntitySetMapping Name="Advices">
+            <EntityTypeMapping TypeName="bigideaModel.Advices">
+              <MappingFragment StoreEntitySet="Advices">
+                <ScalarProperty Name="Daoyan" ColumnName="Daoyan" />
+                <ScalarProperty Name="Subhead" ColumnName="Subhead" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PicUrl" ColumnName="PicUrl" />
+                <ScalarProperty Name="CoverStory" ColumnName="CoverStory" />
+                <ScalarProperty Name="Dinting" ColumnName="Dinting" />
+                <ScalarProperty Name="Snakes" ColumnName="Snakes" />
+                <ScalarProperty Name="Arbitrary" ColumnName="Arbitrary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Article">
+            <EntityTypeMapping TypeName="bigideaModel.Article">
+              <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="Trade" ColumnName="Trade" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Media" ColumnName="Media" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="MainPicUrl" ColumnName="MainPicUrl" />
+                <ScalarProperty Name="Cont" ColumnName="Cont" />
+                <ScalarProperty Name="Research" ColumnName="Research" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="PubTime" ColumnName="PubTime" />
+                <ScalarProperty Name="ReadTimes" ColumnName="ReadTimes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Collect">
+            <EntityTypeMapping TypeName="bigideaModel.Collect">
+              <MappingFragment StoreEntitySet="Collect">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comment">
+            <EntityTypeMapping TypeName="bigideaModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="CommentTime" ColumnName="CommentTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="Cont" ColumnName="Cont" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photos">
+            <EntityTypeMapping TypeName="bigideaModel.Photos">
+              <MappingFragment StoreEntitySet="Photos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PicUrl" ColumnName="PicUrl" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Radios">
+            <EntityTypeMapping TypeName="bigideaModel.Radios">
+              <MappingFragment StoreEntitySet="Radios">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RadioUrl" ColumnName="RadioUrl" />
+                <ScalarProperty Name="Cont" ColumnName="Cont" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReArticle">
+            <EntityTypeMapping TypeName="bigideaModel.ReArticle">
+              <MappingFragment StoreEntitySet="ReArticle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="PosId" ColumnName="PosId" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_Comment">
+            <EntityTypeMapping TypeName="bigideaModel.View_Comment">
+              <MappingFragment StoreEntitySet="View_Comment">
+                <ScalarProperty Name="HeadPicUrl" ColumnName="HeadPicUrl" />
+                <ScalarProperty Name="CommentTime" ColumnName="CommentTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Cont" ColumnName="Cont" />
+                <ScalarProperty Name="comId" ColumnName="comId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_Collect">
+            <EntityTypeMapping TypeName="bigideaModel.View_Collect">
+              <MappingFragment StoreEntitySet="View_Collect">
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="ReadTimes" ColumnName="ReadTimes" />
+                <ScalarProperty Name="MainPicUrl" ColumnName="MainPicUrl" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleGive">
+            <EntityTypeMapping TypeName="bigideaModel.RoleGive">
+              <MappingFragment StoreEntitySet="RoleGive">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_User">
+            <EntityTypeMapping TypeName="bigideaModel.View_User">
+              <MappingFragment StoreEntitySet="View_User">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="bigideaModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IsStop" ColumnName="IsStop" />
+                <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="HeadPicUrl" ColumnName="HeadPicUrl" />
+                <ScalarProperty Name="SelfSInfo" ColumnName="SelfSInfo" />
+                <ScalarProperty Name="HeadSculpture" ColumnName="HeadSculpture" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Passward" ColumnName="Passward" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="bigideaModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_Rec">
+            <EntityTypeMapping TypeName="bigideaModel.View_Rec">
+              <MappingFragment StoreEntitySet="View_Rec">
+                <ScalarProperty Name="ReadTimes" ColumnName="ReadTimes" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="MainPicUrl" ColumnName="MainPicUrl" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="PosId" ColumnName="PosId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

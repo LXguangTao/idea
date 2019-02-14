@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d7d60ea46fa1458da596c851a60ffaa6" Name="Diagram1">
+        <EntityTypeShape EntityType="bigideaModel.Advices" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="bigideaModel.Article" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bigideaModel.Collect" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bigideaModel.Comment" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bigideaModel.Photos" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bigideaModel.Radios" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bigideaModel.ReArticle" Width="1.5" PointX="5.75" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="bigideaModel.FK__Collect__Article__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="bigideaModel.FK__Comment__Article__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="bigideaModel.FK__Photos__ArticleI__0EA330E9" ManuallyRouted="false" />
+        <AssociationConnector Association="bigideaModel.FK__Radios__ArticleI__1367E606" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="bigideaModel.View_Comment" Width="1.5" PointX="7.375" PointY="7.75" />
+        <EntityTypeShape EntityType="bigideaModel.View_Collect" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="bigideaModel.RoleGive" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="bigideaModel.View_User" Width="1.5" PointX="8.375" PointY="3.75" />
+        <EntityTypeShape EntityType="bigideaModel.User" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="bigideaModel.FK__Collect__UserId__22AA2996" />
+        <AssociationConnector Association="bigideaModel.FK__Comment__UserId__1CF15040" />
+        <AssociationConnector Association="bigideaModel.FK__RoleGive__UserId__4CA06362" />
+        <EntityTypeShape EntityType="bigideaModel.Role" Width="1.5" PointX="0.5" PointY="11.625" />
+        <AssociationConnector Association="bigideaModel.FK__RoleGive__RoleId__4D94879B" />
+        <EntityTypeShape EntityType="bigideaModel.View_Rec" Width="1.5" PointX="9.375" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

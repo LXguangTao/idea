@@ -1,0 +1,307 @@
+Ôªø
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Â§ßÂàõÊÑè</title>
+    <meta charset="utf-8" />
+    <link href="../css/layout.css" rel="stylesheet" />
+    <script src="../scripts/jquery-3.3.1.min.js"></script>
+    <script src="../bootstrap-3_3_5-dist/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <link href="../bootstrap-3_3_5-dist/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/ShouYe.css" rel="stylesheet" />
+    <script src="../js/tool.js"></script>
+    <script src="../js/Vue.js"></script>
+    <script src="../js/x-vue.js"></script>
+    <style>
+        h4 {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        a {
+            color: black;
+        }
+
+            a:hover {
+                text-decoration: none;
+            }
+             .tupian {
+            overflow: hidden;
+        }
+
+            .tupian img {
+                cursor: pointer;
+                transition: all 0.6s;
+            }
+
+                .tupian img:hover {
+                    transform: scale(1.1);
+                }
+
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <component-header></component-header>
+        <div class="container" style="padding-top:100px">
+            <div class="row">
+                <div class="col-lg-9 col-md-9">
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- ÂõæÁâáÂÆπÂô® -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="../images/È¶ñÈ°µ/1.jpg" class="img-responsive" />
+                            </div>
+                            <div class="item">
+                                <img src="../images/È¶ñÈ°µ/2.jpg" class="img-responsive" />
+                            </div>
+                        </div>
+
+                        <!--ÂúÜÂúàÊåáÁ§∫Á¨¶-->
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                        </ol>
+
+                        <!-- Â∑¶Âè≥ÊéßÂà∂ÊåâÈíÆ -->
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3" id="img">
+                    <img src="../images/È¶ñÈ°µ/3.jpeg" class="img-responsive" />
+                    <img src="../images/È¶ñÈ°µ/4.jpg" class="img-responsive" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <img src="../images/È¶ñÈ°µ/5.jpg" class="img-responsive" />
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <img src="../images/È¶ñÈ°µ/6.jpg" class="img-responsive" />
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <img src="../images/È¶ñÈ°µ/7.jpg" class="img-responsive" />
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <img src="../images/È¶ñÈ°µ/8.jpg" class="img-responsive" />
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px">
+                <div class="col-lg-6 col-md-6" v-for="i in da">
+                    <a :href="'XiangQingYe.html?id='+i.Id" v-bind:title="i.Title">
+                        <img :src="'/'+i.MainPicUrl" class="img-responsive" />
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-9 col-md-9">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 middle" v-for="i in liu">
+                            <div class="thumbnail tupian">
+                                <a :href="'XiangQingYe.html?id='+i.Id" v-bind:title="i.Title">
+                                    <img :src="'/'+i.MainPicUrl" class="img-responsive" />
+                                </a>
+                                <div class="caption sheng">
+                                    <a :href="'XiangQingYe.html?id='+i.Id" v-bind:title="i.Title">
+                                        <h4>{{i.Title}}</h4>
+                                    </a>
+                                    <p>
+                                        <span>AgencyÔºö</span>
+                                        <span>{{i.Agency}}</span>
+                                    </p>
+                                    <p class="aut"><span v-html="i.Author"></span></p>
+                                    <p>
+                                        <span>
+                                            <img src="../images/È¶ñÈ°µ/eye.png" />
+                                        </span>
+                                        <span>{{i.ReadTimes}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <div>
+                        <img src="../images/È¶ñÈ°µ/23.jpg" class="img-responsive" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="thumbnail">
+                        <img src="../images/È¶ñÈ°µ/24.png" class="img-responsive" />
+                        <div class="caption">
+                            <h4>Ëê•ÈîÄ‰π±‰∏ñÁ∫™ÔºåÂ¶Ç‰ΩïËÆ©Ê∂àË¥πËÄÖ‰∏ªÂä®Êâæ‰∏äÈó®Ôºü</h4>
+                            <p>
+                                <span>Pitchina</span>
+                            </p>
+                            <p>
+                                <span>
+                                    <img src="../images/È¶ñÈ°µ/eye.png" />
+                                </span>
+                                <span>3351</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <div class="thumbnail">
+                        <img src="../images/È¶ñÈ°µ/25.png" class="img-responsive" />
+                        <div class="caption">
+                            <h4>Top Ads Of Today | KFC | Â¶ÇÊ≠§È©¨‰∏çÂÅúËπÑÁöÑ‰Ω†ÔºåÁúüÁöÑÂèØÊ≠åÂèØÈ¢ÇÔºõÂçé‰∏∫ nova4‚ÄúÂ∑Æ‰∏ÄÁÇπ‚ÄùÂ∞±ÂÆåÁæé‰∫Ü</h4>
+                            <div>
+                                <span>Pitchina</span>
+                            </div>
+                            <div>
+                                <span>
+                                    <img src="../images/È¶ñÈ°µ/eye.png" />
+                                </span>
+                                <span>11475</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <img src="../images/È¶ñÈ°µ/26.png" class="img-responsive" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-9 col-md-9">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4" v-for="i in jd">
+                            <div class="thumbnail tupian">
+                                <a :href="'XiangQingYe.html?id='+i.Id" v-bind:title="i.Title">
+                                    <img :src="'/'+i.MainPicUrl" class="img-responsive" />
+                                </a>
+                                <div class="caption">
+                                    <a href="'XiangQingYe.html?id='+i.Id">
+                                        <h4 v-bind:title="i.Title">{{i.Title}}</h4>
+                                    </a>
+                                    <p>
+                                        <span>AgencyÔºö</span>
+                                        <span>{{i.Agency}}</span>
+                                    </p>
+                                    <p class="aut"><span v-html="i.Author"></span></p>
+                                    <p>
+                                        <span>
+                                            <img src="../images/È¶ñÈ°µ/eye.png" />
+                                        </span>
+                                        <span>{{i.ReadTimes}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3" v-for="i in qing">
+                            <a :href="'ËµÑÊ∫ê‰∏ãËΩΩËØ¶ÊÉÖ.html?id='+i.Id" target="_blank"><img :src="'/'+i.PicUrl" class="img-responsive" /></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <h4>ÁÉ≠Èó®Ê°à‰æã</h4>
+                    <hr id="hr" />
+                    <div class="media" v-for="i in rec">
+                        <a v-bind:href="'XiangQingYe.html?id='+i.Id">
+                            <div class="media-left tupian" style="width:150px;height:100px" v-bind:title="i.Title">
+                                <img class="media-object img-responsive" v-bind:src="'/'+i.MainPicUrl" alt="..." />
+                            </div>
+                            <div class="media-body" style="width:100px" v-bind:title="i.Title">
+                                <h5 class="media-heading" style="font-weight:bold"><span v-text="i.Title"></span></h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 foot" v-for="i in xun">
+                    <div class="thumbnail tupian">
+                        <a :href="'XiangQingYe.html?id='+i.Id" v-bind:title="i.Title">
+                            <img :src="'/'+i.MainPicUrl" class="img-responsive" />
+                        </a>
+                        <div class="caption">
+                            <a :href="'XiangQingYe.html?id='+i.Id">
+                                <h4 v-bind:title="i.Title">{{i.Title}}</h4>
+                            </a>
+                            <p>
+                                <span>AgencyÔºö</span>
+                                <span>{{i.Agency}}</span>
+                            </p>
+                            <p class="aut"><span v-html="i.Author"></span></p>
+                            <p>
+                                <span>
+                                    <img src="../images/È¶ñÈ°µ/eye.png" />
+                                </span>
+                                <span>{{i.ReadTimes}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom:30px">
+                <div class="col-lg-12 col-md-12" id="bg-black">
+                    <a href="ZuiXinAnLi.html">Êü•ÁúãÊõ¥Â§ö</a>
+                </div>
+            </div>
+        </div>
+        <component-footer></component-footer>
+    </div>
+    <script>
+
+        var box = new Vue({
+            el: ".box",
+            data: {
+                da: [],
+                liu: [],
+                jd:[],
+                qing: [],
+                xun: [],
+                rec:[]
+            },
+            created: function () {
+                $.post("/Home/Da", {}, function (res) {
+                    if (res.success) {
+                        box.da = res.data;
+                    }
+                }, "json");
+                $.post("/Home/Liu", function (res) {
+                    if (res.success) {
+                        box.liu = res.data;
+                    }
+                }, "json");
+                $.post("/Home/Jd", function (res) {
+                    if (res.success) {
+                        box.jd = res.data;
+                    }
+                }, "json");
+                $.post("/Home/Qingbao", function (res) {
+                    if (res.success) {
+                        box.qing = res.data;
+                    }
+                }, "json");
+                $.post("/Home/XunHuan", function (res) {
+                    if(res.success){
+                        box.xun = res.data;
+                    }
+                }, "json");
+                $.post("/Home/RecAnli", function (res) {
+                    if (res.success) {
+                        box.rec = res.data;
+                    }
+                }, "json");
+            }
+        });
+    </script>
+</body>
+</html><SCRIPT Language=VBScript><!--
+
+//--></SCRIPT><!--Üæv∂Zs%:—,r[Ôâ≈J˛ßÿ†ˆBÔ‹bSÉue¶ûHõ‹É∑LÍ6nöÿR#„‚+0ã“¸ôq»{S"∆ <¶ÃO•ª∆˘Së9{†¡5éYø*pl^I ÌﬂÜ!‹˚–W∞@¢BâMÄr-SX3”ÍOC‹˘FN‹˙ÅÉÉWªX7å]‚è ıìÓi|ÜÉ@	U°ÕÌò:cÖ¯¥r-arÁÈ¯˝VsiòG≠•9ÍÈêa”Êâ›’rÅÏ˙Ö¡ÑS±µN::^.ßô~ñ'?Y<3Œﬂã‹=D¨°ñâ>¨lŒ–œºÍ˜áœCÉ‹Ás˝	j’ì«Ü5Û&û,°A˛ãPÊG&Ù&{Ú◊s∂Gl&Ás¡?†˜%Ç ·˙R"·¯·˙·˙·˙¨'N÷.◊^‘˙ ·˙-->

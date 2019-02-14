@@ -1,0 +1,42 @@
+#header {
+    background-color:whitesmoke;
+    margin-bottom:1%;
+    width:100%;
+    position:fixed;
+    z-index:11;
+}
+#hr {
+    height:5px;
+    background-color:black;
+}
+#header a{
+    color: black;
+    font-size:18px;
+    text-decoration: none;
+}
+#header a:hover{
+    color:green;
+    font-size:18px;
+    text-decoration: none;
+}
+#header div ul{
+    margin-left: 7%;
+}
+#header div ul li{
+    margin-left:3%;
+}
+.header-right1 {
+    margin-right:-2%;
+}
+#footer {
+    background-color:black;
+}
+#footer div {
+    font-size:18px;
+    margin-bottom:1%;
+    margin-left:6%;
+    color:white;
+}
+#footer-top {
+    margin-top:6%;
+}

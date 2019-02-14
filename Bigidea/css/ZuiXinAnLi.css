@@ -1,0 +1,44 @@
+.container-fluid {
+    margin:0px 5%;
+}
+.row-col {
+    background-color:ghostwhite;
+    padding:2% 0px;
+}
+.hr {
+    height:5px;
+    background-color:black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#row {
+    margin:2% 0px;
+}
+#zxal {
+    font-size:30px;
+    font-weight:bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+select {
+    border:0px;
+}
+.select-opt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#bg-black a{
+    color:yellow;
+    font-size:25px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+#bg-black {
+    background-color:black;
+    padding:1%;
+}

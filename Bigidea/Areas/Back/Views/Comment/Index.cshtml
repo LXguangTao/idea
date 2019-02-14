@@ -1,0 +1,152 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="~/css/font.css">
+    <link rel="stylesheet" href="~/css/xadmin.css">
+    <script src="~/scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="~/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="~/js/xadmin.js"></script>
+</head>
+<body>
+    <div class="x-body">
+        <div class="demoTable" style="margin:15px">
+            <form class="layui-form" onsubmit="return false;" id="x-form">
+                标题：
+                <div class="layui-inline">
+                    <input class="layui-input" name="title" id="txtTitle" autocomplete="off">
+                </div>
+                类别：
+                <div class="layui-inline">
+                    <select id="selTypes">
+                        <option value="">未选择</option>
+                        @{
+                            foreach (var item in ViewBag.type)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        }
+                    </select>
+                </div>
+                标签：
+                <div class="layui-inline">
+                    <select id="selTag">
+                        <option value="">未选择</option>
+                        @{
+                            foreach (var item in ViewBag.tag)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        }
+                    </select>
+                </div>
+                行业：
+                <div class="layui-inline">
+                    <select id="selTrade">
+                        <option value="">未选择</option>
+                        @{
+                            foreach (var item in ViewBag.trade)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <button class="layui-btn" data-type="reload" id="search">搜索</button>
+                <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+                    <i class="layui-icon" style="line-height:30px">ဂ</i>
+                </a>
+            </form>
+        </div>
+        <table class="layui-table" lay-filter="tabs" id="tableList"></table>
+    </div>
+    <!--头部工具栏-->
+    <script type="text/html" id="toolbarDemo">
+        <button class="layui-btn layui-btn-danger" lay-event="delAll"><i class="layui-icon"></i>批量删除</button>
+    </script>
+    <!--行内工具栏-->
+    <script type="text/html" id="barDemo">
+        <a lay-event="watch" class="layui-btn layui-btn-xs">查看评论</a>
+    </script> 
+    <script>
+        layui.use(['form', 'layer', 'table'], function () {
+            var form = layui.form, table = layui.table, layer = layui.layer;
+
+            table.render({
+                elem: '#tableList'
+                , id: 'testReload'
+                , height: 520
+                , url: '/back/Comment/CaseList'
+                , page: true
+                , limit: 10
+                , toolbar: '#toolbarDemo'
+                , method: 'post'
+                , cols: [[ //表头
+                { type: 'checkbox' }
+                , { field: 'Id', title: 'Id', width: 50, sort: true }
+                , { field: 'Title', title: '标题', width: 300 }
+                , { field: 'right', align: 'left', title: '操作', toolbar: '#barDemo' }
+                ]]
+            });
+            //重载
+            $('.demoTable .layui-btn').on('click', function () {
+                var type = $(this).data('type');
+                    //执行重载
+                    table.reload('testReload', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                      , where: {
+                          title: $("#txtTitle").val(),
+                          type: $("#selTypes").val(),
+                          tag: $("#selTag").val(),
+                          trade: $("#selTrade").val()
+                      }
+                    });
+            });
+            //行内工具栏
+            table.on('tool(tabs)', function (obj) {
+                var data = obj.data;
+                var layEvent = obj.event;
+                if (layEvent==='watch') {                    
+                    showChapters(this,data.Id,"/back/comment/commentlist?id="+data.Id)
+                }
+            });
+        });
+        function showChapters(obj, param,url) {
+            layui.use(['element'], function () {
+                $ = layui.jquery;
+                element = layui.element;
+                for (var i = 0; i < $('.x-iframe', window.parent.document).length; i++) {//获取父页面的dom元素
+                    if ($('.x-iframe', window.parent.document).eq(i).attr('data-id') == param) {
+                        parent.element.tabChange('xbs_tab', i);
+                        //x-tab 为父页面<div class="layui-tab layui-tab-card site-demo-title x-main" lay-filter="x-tab" lay-allowclose="true"></div>
+                        return;
+                    }
+                };
+                res = parent.element.tabAdd('xbs_tab', {//从父页面添加tab选项卡，如果不指定id，选项卡id会自增
+                    title: "评论列表" //用于演示
+                    , content: '<iframe frameborder="0" data-id="' + param + '" src="' + url + '" class="x-iframe"></iframe>',
+                    id:12
+                });
+                parent.element.tabChange('xbs_tab', $('.layui-tab-title li', window.parent.document).eq(0));//添加选项卡后，默认此tab为选中状态
+                $('.layui-tab-title li', window.parent.document).eq(0).find('i').remove();
+
+            });
+        }
+    </script>
+</body>
+</html>

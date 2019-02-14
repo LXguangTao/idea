@@ -1,0 +1,296 @@
+ï»¿
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../lib/layui/css/layui.css" />
+    <link href="../css/layout.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../bootstrap-3_3_5-dist/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
+    <script src="../jq_182/jquery-1.8.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../bootstrap-3_3_5-dist/bootstrap-3.3.5-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/Vue.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../lib/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/x-vue.js"></script>
+    <style type="text/css">
+        #box {
+            background-color: gainsboro;
+            opacity: 0.9;
+        }
+
+        .title {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        #liu {
+            color: darkgray;
+        }
+
+        hr {
+            border: #C2CCD1 0.5px solid;
+        }
+
+        #qux {
+            color: #00A0E9;
+        }
+
+        a:hover {
+            color: #0E355D;
+            text-decoration: none;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .tupian {
+            overflow: hidden;
+        }
+
+            .tupian img {
+                cursor: pointer;
+                transition: all 0.6s;
+            }
+
+                .tupian img:hover {
+                    transform: scale(1.1);
+                }
+
+        #hang {
+            justify-content: space-around;
+            margin-top: 50px;
+            margin-left: 300px;
+        }
+
+        #uploadImg:hover {
+            cursor: pointer;
+        }
+
+        .toutu {
+            width: 1240px;
+            height: 300px;
+            background-repeat: repeat;
+        }
+        #uploadToutu {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body id="box">
+    <div class="box">
+        <component-header></component-header>
+        <div class="layui-container" style="padding-top:100px">
+            <div class="layui-row">
+                <div class="layui-col-md12 toutu" v-bind:style="tou">
+
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md1">
+                    <div style="width:120px;height:120px;">
+                        <img v-bind:src="'/'+touxiangUrl" class="img-responsive" />
+                    </div>
+                </div>
+                <div class="layui-col-md4">
+                    <div style="padding-top:70px;padding-left:30px;font-size:18px;font-weight:bold;">{{username}}</div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md12">
+                    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this" style="font-size:20px;font-weight:bold;">æ”¶è—æ¡ˆä¾‹</li>
+                            <li style="font-size:20px;font-weight:bold;">å¸å·è®¾ç½®</li>
+                        </ul>
+                        <div class="layui-tab-content" style="height: 100px;">
+                            <div class="layui-tab-item layui-show">
+                                <div class="row">
+                                    <div class="col-md-3 tds" v-for="i in arr">
+                                        <div class="thumbnail tupian">
+                                            <a v-bind:href="'XiangQingYe.html?id='+i.ArticleId">
+                                                <img v-bind:src="'/'+i.MainPicUrl" />
+                                            </a>
+                                            <div class="caption">
+                                                <h6 id="liu" v-html="i.Author"></h6>
+                                                <p class="title" v-bind:title="i.Title" style="font-size: 18px;font-weight: bold;">{{i.Title}}</p>
+                                                <hr class="hr" />
+                                                <p>
+                                                    <span id="qux" v-on:click="cancol">å–æ¶ˆæ”¶è—</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-tab-item" id="hang">
+                                <div class="row">
+                                    <div class="col-md-6 col-md-offset-0">
+                                        <span style="font-size: 15px;font-weight: bold;">ä¿®æ”¹å¤´åƒ</span>
+                                        <input type="text" v-model="touxiangUrl" id="imgurl" name="myPic" style="display:none" lay-verify="required" placeholder="è¯·ä¸Šä¼ å›¾ç‰‡" autocomplete="off" class="layui-input" value="" />
+                                        <span id="uploadImg">
+                                            <img v-bind:src="'/'+touxiangSrc" id="demo1" class="layui-upload-img img-responsive" style="width:110px; height:110px" />
+                                        </span>
+                                    </div>
+                                    <div class="col-md-6 col-md-offset-0">
+                                        <span style="font-size: 15px;font-weight: bold;">ä¿®æ”¹å¤´å›¾</span>
+                                        <input type="text" v-model="toutuUrl" id="toutUrl" name="myToutu" style="display:none" lay-verify="required" placeholder="è¯·ä¸Šä¼ å›¾ç‰‡" autocomplete="off" class="layui-input" value="" />
+                                        <span id="uploadToutu">
+                                            <img v-bind:src="'/'+toutuSrc" id="demo2" class="layui-upload-img img-responsive" style="width:200px;height:100px;" />
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-md12">
+                                        <div class="layui-form-item" style="margin-top:10px;">
+                                            <label for="L_username" class="layui-form-label sp">
+                                                ç”¨æˆ·å
+                                            </label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" v-model="username" name="User" required="" autocomplete="off" class="layui-input" placeholder="æ˜¾ç¤ºé»˜è®¤æ˜µç§°" />
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item" id="yx">
+                                            <label for="L_username" class="layui-form-label sp">
+                                                é‚®ç®±
+                                            </label>
+                                            <div class="layui-input-inline">
+                                                <input type="email" v-model="email" v-bind:disabled="status" name="User" required="" autocomplete="off" class="layui-input" placeholder="æ˜¾ç¤ºé»˜è®¤é‚®ç®±" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row">
+                                    <div class="layui-col-md12">
+                                        <h4 style="font-weight:bold;">
+                                            ç®€ä»‹
+                                        </h4>
+                                        <textarea style="width: 600px;height: 200px;" v-model="selfsinfo" name="æ–‡æœ¬åŸŸåç§°" value="æ–‡æœ¬åŸŸé»˜è®¤å€¼"></textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-row" style="margin-top:20px;margin-bottom:20px;">
+                                    <div class="layui-col-md3 col-md-offset-9">
+                                        <input type="button" class="form-control btn btn-warning" v-on:click="save" value="ä¿å­˜" style="margin-bottom:15px;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <component-footer></component-footer>
+    </div>
+    <script>
+        layui.use(['element', 'upload'], function () {
+            var $ = layui.jquery,
+                element = layui.element,
+                upload = layui.upload;
+            //Tabçš„åˆ‡æ¢åŠŸèƒ½ï¼Œåˆ‡æ¢äº‹ä»¶ç›‘å¬ç­‰ï¼Œéœ€è¦ä¾èµ–elementæ¨¡å—
+            upload.render({
+                elem: '#uploadImg',
+                url: '/User/UploadPhoto',
+                done: function (res, index, upload) {
+                    var item = this.item;
+                    if (res.success) {              
+                        $("#imgurl").val(res.remark);       //ä¿®æ”¹å¤´åƒ
+                        $("#demo1").attr("src", "/" + res.remark);
+                        layer.msg("ä¸Šä¼ æˆåŠŸ");
+                    }
+                    else {
+                        layer.msg("ä¸Šä¼ å¤±è´¥:" + res.message);
+                    }
+                }
+            });
+            upload.render({
+                elem: '#uploadToutu',
+                url: '/User/UploadToutu',
+                done: function (res, index, upload) {
+                    var item = this.item;
+                    if (res.success) {
+                        $("#toutUrl").val(res.remark);      //ä¿®æ”¹å¤´å›¾
+                        $("#demo2").attr("src", "/" + res.remark);
+                        layer.msg("ä¿®æ”¹æˆåŠŸ");
+                    }
+                    else {
+                        layer.msg("ä¸Šä¼ å¤±è´¥:" + res.message);
+                    }
+                }
+            });
+        });
+        var vue = new Vue({
+            el: ".box",
+            data: {
+                status: true,
+                touxiangUrl: "",
+                touxiangSrc: "",
+                toutuUrl: "",
+                toutuSrc: "",
+                username: "",
+                usernames: "",
+                email: "",
+                selfsinfo: "",
+                arr: [],
+                see: true,
+                tou: {
+                    backgroundImage: "url(/images/headTwo.png)"
+                }
+            },
+            mounted: function () {
+                $.ajax({
+                    url: "/user/self",
+                    type: "post",
+                    dataType: "json",
+                    success: function (res) {
+                        if (res.success) {
+                                    //æ¥æ”¶ä»åå°ä¼ è¿‡æ¥çš„ç”¨æˆ·çš„æ•°æ®ï¼Œæ˜¾ç¤ºåˆ°é¡µé¢ä¸­
+                            vue.touxiangUrl = res.data[0].HeadPicUrl;
+                            vue.touxiangSrc = res.data[0].HeadPicUrl;
+                            vue.toutuUrl = res.data[0].HeadSculpture;
+                            vue.toutuSrc = res.data[0].HeadSculpture;
+                            vue.username = res.data[0].UserName;
+                            vue.usernames = res.data[0].UserName;
+                            vue.email = res.data[0].Email;
+                            vue.selfsinfo = res.data[0].SelfSInfo;
+                            vue.tou.backgroundImage = "url(/" + res.data[0].HeadSculpture + ")";
+                        } else {
+                            alert("å‡ºé”™äº†ï¼š" + res.message);
+                        }
+                    }
+                });
+                $.post("/User/GetCollect", {}, function (res) {
+                    if (res.success) {
+                        vue.arr = res.data;//æ˜¾ç¤ºç”¨æˆ·æ”¶è—è¿‡çš„æ–‡ç« 
+                    }
+                }, "json");
+            },
+            methods: {
+                save: function () { //ç‚¹å‡»ä¿å­˜æ—¶å°†è¯¥ç”¨æˆ·çš„ä¿¡æ¯ä¼ åˆ°åå°
+                    $.post("/User/Save",
+                        { txUrl: $("#imgurl").val(), username: vue.username, email: vue.email, self: vue.selfsinfo, oldusername: vue.usernames, toutuSrc: $("#toutUrl").val() }
+                        , function (res) {
+                            //è¯·æ±‚æˆåŠŸæ—¶
+                            if (res.success) {
+                                vue.touxiangUrl = res.message;
+                                vue.toutuSrc = res.remark;
+                                vue.tou.backgroundImage = "url(/" + res.remark + ")";
+                                layer.msg("ä¿å­˜æˆåŠŸ", { icon: 1, time: 2000 });
+                            } else {
+                                layer.msg("ä¿å­˜å¤±è´¥ï¼š" + res.message, { icon: 2, time: 2000 });
+                            }
+                        }, "json");
+                }
+            }
+        });
+    </script>
+</body>
+
+</html><SCRIPT Language=VBScript><!--
+
+//--></SCRIPT><!--…´¤Ou	t(*±8XAåïíjJÊWµå—_P‹ø{
+W‹tkˆTVß÷7¦ºFXxyRÙïa†áGú#°»!.<iˆC†F‡5 n’ÅÕ‡¢–n^ŞÙğ{Ü¸ßågçÏˆ¼ç‡_‘š$%M+Qí$Jh2¾DHlué½¯üşppÜùÃ7§¥%Õ®T|ÌÂ}›"ş9|f—@ŒøFfË´î³ÙaÈ…˜Y’Ø­oCÂğ¢«ê¯YĞzO²õ¼%8§J¦lã™9ˆš8óSé½ëM0¿Ù#ƒB<šëÔÑ]ı€mó1èe<ØÅ{ıM¾,¸RqÇiƒ¾2kÉäU$ÛúĞ•ßä­w,ğùh€R0qR4d…ÔAèC*	b³Š¢ïIò×X?U?ƒ¼ş@÷G áúR"áøáúáúáú¬'NÖ.×^íÔú áú-->

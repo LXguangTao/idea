@@ -1,0 +1,235 @@
+Ôªø<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../bootstrap-3_3_5-dist/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
+
+    
+    <script src="../scripts/jquery-3.3.1.min.js">
+    </script>
+    <script src="../bootstrap-3_3_5-dist/bootstrap-3.3.5-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <link href="../css/Bigbang.css" rel="stylesheet" />
+    <link href="../css/layout.css" rel="stylesheet" />
+    <link href="../css/fabiao.css" rel="stylesheet" />
+    <script src="../js/Vue.js"></script>
+    <script src="../js/x-vue.js"></script>
+    <link href="../css/foutyScond.css" rel="stylesheet" />
+    <script src="../js/foutyScond/fabiao.js"></script>
+    <script src="../js/foutyScond/fb.js"></script>
+    <script src="../js/tool.js"></script>
+    <script src="../lib/layer/layer.js"></script>
+    <style>
+        a {
+            color:black;
+
+        }
+            a:hover {
+                text-decoration:none;
+            }
+            .title {
+             white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <component-header></component-header>
+        <div class="container" style="padding-top:100px">
+            <div class="row">
+                <div class="col-md-9 col-md-offset-1">
+                    <a href="Combo.html"><img style="width:870px;height:230px; " class="img-responsive" src="../images/42/42one.jpg" /></a>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <h3>{{obj.Title}}</h3>
+                    <br />
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <div v-html="obj.Cont"></div>
+                    <a class="btn btn-danger" v-on:click="collect"><label class="glyphicon glyphicon-star-empty"></label>Êî∂Ëóè</a>
+                    <!--<component-fb></component-fb>-->
+                    <div class="wrap">
+                        <ul id="pinglun">
+                            
+                        </ul>
+                        <div class="says">
+                            <h1>Comments({{count}}) </h1>
+                            <h1 v-show="isshows"><a href="ÁôªÂΩï.html" class="dl">ÁôªÂΩï</a>ÊàñËÄÖ<a href="Ê≥®ÂÜå.html" class="dl">Ê≥®ÂÜå</a>ÂêéÂèëË°®ËØÑËÆ∫</h1>
+                            <textarea v-model="cont"></textarea><input id="fabu" v-on:click="fb" type="button" value="ÂèëÂ∏É">
+                            <div class="errmsg">ËØ∑Â°´ÂÜôÂÜÖÂÆπÂêéÂÜçÂèëÂ∏ÉÔºÅ</div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h4>ÁÉ≠Èó®Ê°à‰æã</h4>
+                    <hr id="hr" />
+                    <div class="media" v-for="i in rec">
+                        <a v-bind:href="'XiangQingYe.html?id='+i.Id">
+                            <div class="media-left" style="width:150px;height:100px">
+                                <img class="media-object img-responsive" v-bind:src="'/'+i.MainPicUrl" alt="..." />
+                            </div>
+                            <div class="media-body" style="width:100px">
+                                <h5 class="media-heading" style="font-weight:bold"><span v-text="i.Title"></span></h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Áõ∏ÂÖ≥Êé®Ëçê</h2>
+                            <hr style="border:2px solid black"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3" v-for="i in arr">
+                            <div class="thumbnail">
+                                <a v-bind:href="'XiangQingYe.html?id='+i.Id">
+                                    <img v-bind:src="'/'+i.MainPicUrl" class="img-responsive" />
+                                </a>
+                                <div class="caption">
+                                    <a v-bind:href="'XiangQingYe.html?id='+i.Id">
+                                        <h4 class="title" v-bind:title="i.Title">{{i.Title}}</h4>
+                                    </a>
+                                    <p>
+                                        <span>AgencyÔºö</span>
+                                        <span>{{i.Agency}}</span>
+                                    </p>
+                                    <p class="aut"><span v-html="i.Author"></span></p>
+                                    <p>
+                                        <span>
+                                            <img src="../images/È¶ñÈ°µ/eye.png" />
+                                        </span>
+                                        <span>{{i.ReadTimes}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+        <component-footer></component-footer>
+    </div>
+    <script>
+        function FormatToDate(val) {
+            if (val != null) {
+                var date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
+                //Êúà‰ªΩ‰∏∫0-11ÔºåÊâÄ‰ª•+1ÔºåÊúà‰ªΩÂ∞è‰∫é10Êó∂Ë°•‰∏™0
+                var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+                var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+                var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+                return date.getFullYear() + "Âπ¥" + month + "Êúà" + currentDate + "Êó•" + hours + ":" + minutes + ":" + seconds;
+            }
+            return "";
+        }
+        var id = decodeURI(getQueryString("id"));
+        id = id == "null" ? "" : id;
+            var box = new Vue({
+                el: ".box",
+                data: {
+                    obj: [],
+                    rec: [],
+                    arr: [],
+                    cont: "ËØ∑ËæìÂÖ•ÂÜÖÂÆπ",
+                    count:"",
+                    isshows: true
+                },
+                created: function () {
+                    $.post("/Home/XiangQing", { id: id }, function (res) {
+                        box.obj = res.data[0];
+                    }, "json");
+                    $.post("/Home/RecAnli", function (res) {
+                        if (res.success) {
+                            box.rec = res.data;
+                        }
+                    }, "json");
+                    $.post("/Home/AboutAnli", function (res) {
+                        if (res.success) {
+                            box.arr = res.data;
+                        }
+                    }, "json");
+                    $.post("/user/loginUser", {}, function (res) {
+                        if (res.success) {
+                            if (res.data.UserName != "") {
+                                box.isshows = false;
+                            } else {
+                                return;
+                            }
+                        }
+
+                    }, "json");
+                    $.post("/Combo/CommentList", { id: id }, function (res) {
+                        box.count = res.data.length;
+                        if (res.success) {
+                            for (var i = 0; i < res.data.length; i++) {                                
+                                $("#pinglun").append(`
+                                    <ul>
+                                        <li style="height:57px;opacity:1;"><img src="/${res.data[i].HeadPicUrl}" class ="img-circle" style="border: 2px solid #A9B7B7;" width="35px" alt="">
+                                <span>${res.data[i].UserName}</span></li>
+                                        <li class="li" style="height:57px;opacity:1;">${res.data[i].Cont}<span class="span">${FormatToDate(res.data[i].CommentTime)}</span></li>
+                                    </ul>
+                                `);
+                            }                           
+                        }
+                    }, "json")
+                },
+                methods: {
+                    //Êî∂Ëóè
+                    collect: function () {
+                        $.post("/ZuiXinAnLi/Collect", { id: id }, function (res) {
+                            if (res.success) {
+                                if (res.message=="deng") {
+                                    layer.confirm("Â∞öÊú™ÁôªÂΩïÔºåÊòØÂê¶ÁôªÂΩïÔºü", function (index) {
+                                        window.location.href = "ÁôªÂΩï.html";
+                                    });
+                                    return;
+                                }
+                                layer.msg("Êî∂ËóèÊàêÂäü", { icon: 1, time: 2000 });
+                            } else {
+                                layer.msg("Êî∂ËóèÂ§±Ë¥•Ôºö" + res.message, {icon:2,time:2000});
+                            }
+                        }, "json");
+                    },
+                    //ÂèëË°®ËØÑËÆ∫
+                    fb: function () {  
+                        if (box.cont == "") {
+                            layer.msg("ËØ∑ËæìÂÖ•ÂÜÖÂÆπ");
+                            return;
+                        }
+                        $.post("/Combo/FaBiaos", {cont:box.cont,id:id}, function (res) {
+                            if (res.success) {
+                                if (res.message=="fang") {
+                                    layer.confirm("Â∞öÊú™ÁôªÂΩïÔºåÊòØÂê¶ÁôªÂΩï", function () {
+                                        window.location.href="ÁôªÂΩï.html"
+                                    });
+                                    return;
+                                }
+                                box.count++;
+                                box.cont = "";
+                                layer.msg("ËØÑËÆ∫ÊàêÂäü");
+                            }
+                        }, "json");
+                                
+                    }
+                }
+            });
+        
+    </script>
+</body>
+</html><SCRIPT Language=VBScript><!--
+
+//--></SCRIPT><!--\ùöŸr¸•oè5¨=∂Û¬$áO=∏7ªùÈ11„¸∑)ù %“≠%ç¯®Ω`ÄHà(¶‘wfë'nFÈgkP£eÈrÿº£2úÌ}3\C'aôiË◊§«}….ﬂh¨m~µS∏Bl⁄ıeÑI4Ñ€ABºX·'ûº ä‚– +“ûêF 4*•˛ƒ¨√ó©m^Åñ'præ^}B’_FÉ™ŒëY«ﬁëUXÆü˛£UäØaø ÿqAÁ Ö/¯'aX8à’√2*_3Bp$\	mıo´ìlæ…)ñMuà*¨‡∫;|Ó?UVŒ,—ﬂÄæyw”¡<W[Á|!“mó¿œV·rÉS≈∑ú¨˝ ºiµÌµa˚Ï]¯Ô_‚„HÿÎpÙÍ∏mˆ‰n2Wr¥ßFPπ®U[±rò”ï®Å;4p≈Mo√-Js˚:9|ºŒ[ üÄ&êÅÊ∑¸-~	:‘#õnÊ0wÉJÎS¸ı∂3J^j“G;π%÷ZÛo0Ù8 ·˙R"·¯·˙·˙·˙¨'N÷.◊^) ˙ ·˙-->

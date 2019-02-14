@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bigideaModelStoreContainer" CdmEntityContainer="bigideaEntities">
+    <EntitySetMapping Name="Advices">
+      <EntityTypeMapping TypeName="bigideaModel.Advices">
+        <MappingFragment StoreEntitySet="Advices">
+          <ScalarProperty Name="Daoyan" ColumnName="Daoyan" />
+          <ScalarProperty Name="Subhead" ColumnName="Subhead" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PicUrl" ColumnName="PicUrl" />
+          <ScalarProperty Name="CoverStory" ColumnName="CoverStory" />
+          <ScalarProperty Name="Dinting" ColumnName="Dinting" />
+          <ScalarProperty Name="Snakes" ColumnName="Snakes" />
+          <ScalarProperty Name="Arbitrary" ColumnName="Arbitrary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Article">
+      <EntityTypeMapping TypeName="bigideaModel.Article">
+        <MappingFragment StoreEntitySet="Article">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Tags" ColumnName="Tags" />
+          <ScalarProperty Name="Trade" ColumnName="Trade" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Media" ColumnName="Media" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="Agency" ColumnName="Agency" />
+          <ScalarProperty Name="MainPicUrl" ColumnName="MainPicUrl" />
+          <ScalarProperty Name="Cont" ColumnName="Cont" />
+          <ScalarProperty Name="Research" ColumnName="Research" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="PubTime" ColumnName="PubTime" />
+          <ScalarProperty Name="ReadTimes" ColumnName="ReadTimes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Collect">
+      <EntityTypeMapping TypeName="bigideaModel.Collect">
+        <MappingFragment StoreEntitySet="Collect">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comment">
+      <EntityTypeMapping TypeName="bigideaModel.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="CommentTime" ColumnName="CommentTime" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+          <ScalarProperty Name="Cont" ColumnName="Cont" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Photos">
+      <EntityTypeMapping TypeName="bigideaModel.Photos">
+        <MappingFragment StoreEntitySet="Photos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PicUrl" ColumnName="PicUrl" />
+          <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Radios">
+      <EntityTypeMapping TypeName="bigideaModel.Radios">
+        <MappingFragment StoreEntitySet="Radios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RadioUrl" ColumnName="RadioUrl" />
+          <ScalarProperty Name="Cont" ColumnName="Cont" />
+          <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReArticle">
+      <EntityTypeMapping TypeName="bigideaModel.ReArticle">
+        <MappingFragment StoreEntitySet="ReArticle">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+          <ScalarProperty Name="PosId" ColumnName="PosId" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_Comment">
+      <EntityTypeMapping TypeName="bigideaModel.View_Comment">
+        <MappingFragment StoreEntitySet="View_Comment">
+          <ScalarProperty Name="HeadPicUrl" ColumnName="HeadPicUrl" />
+          <ScalarProperty Name="CommentTime" ColumnName="CommentTime" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Cont" ColumnName="Cont" />
+          <ScalarProperty Name="comId" ColumnName="comId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_Collect">
+      <EntityTypeMapping TypeName="bigideaModel.View_Collect">
+        <MappingFragment StoreEntitySet="View_Collect">
+          <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+          <ScalarProperty Name="ReadTimes" ColumnName="ReadTimes" />
+          <ScalarProperty Name="MainPicUrl" ColumnName="MainPicUrl" />
+          <ScalarProperty Name="Agency" ColumnName="Agency" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleGive">
+      <EntityTypeMapping TypeName="bigideaModel.RoleGive">
+        <MappingFragment StoreEntitySet="RoleGive">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_User">
+      <EntityTypeMapping TypeName="bigideaModel.View_User">
+        <MappingFragment StoreEntitySet="View_User">
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="bigideaModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="IsStop" ColumnName="IsStop" />
+          <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+          <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="HeadPicUrl" ColumnName="HeadPicUrl" />
+          <ScalarProperty Name="SelfSInfo" ColumnName="SelfSInfo" />
+          <ScalarProperty Name="HeadSculpture" ColumnName="HeadSculpture" />
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Passward" ColumnName="Passward" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="bigideaModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_Rec">
+      <EntityTypeMapping TypeName="bigideaModel.View_Rec">
+        <MappingFragment StoreEntitySet="View_Rec">
+          <ScalarProperty Name="ReadTimes" ColumnName="ReadTimes" />
+          <ScalarProperty Name="Agency" ColumnName="Agency" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="MainPicUrl" ColumnName="MainPicUrl" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="PosId" ColumnName="PosId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

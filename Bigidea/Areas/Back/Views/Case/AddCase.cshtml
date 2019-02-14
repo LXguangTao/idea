@@ -1,0 +1,161 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.0</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="~/css/font.css">
+    <link rel="stylesheet" href="~/css/xadmin.css">
+    <script src="~/ueditor/ueditor.config.js"></script>
+    <script src="~/ueditor/ueditor.all.min.js"></script>
+    <script src="~/scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="~/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="~/js/xadmin.js"></script>
+
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div style="width:1100px;margin:30px auto">
+        <h1>添加案例</h1>
+        <form class="layui-form" id="forms">
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="width:100px;margin:10px auto">
+                    <button type="button" class="layui-btn" style="background-color:#009688" lay-submit lay-filter="add">添加</button>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>标题</label>
+                <div class="layui-input-inline">
+                    <input type="text" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" name="title" value="" />
+                </div>
+                <label class="layui-form-label">标签</label>
+                <div class="layui-input-inline">
+                    <input type="text" placeholder="请输入标签" autocomplete="off" class="layui-input" name="tag" value="" />
+                </div>
+                <label class="layui-form-label">行业</label>
+                <div class="layui-input-inline">
+                    <select name="trade">
+                        <option value="">--未选择--</option>
+                        @{
+                            foreach (var item in ViewBag.trade)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">地区</label>
+                <div class="layui-input-inline">
+                    <input type="radio" name="area" value="国内" title="国内"  />
+                    <input type="radio" name="area" value="国外" title="国外" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">分类</label>
+                <div class="layui-input-inline">
+                    <select name="type">
+                        <option value="">--未选择--</option>
+                        @{
+                            foreach (var item in ViewBag.type)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <label class="layui-form-label">媒体</label>
+                <div class="layui-input-inline">
+                    <select name="media">
+                        <option value="">--未选择--</option>
+                        @{
+                            foreach (var item in ViewBag.media)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">作者</label>
+                <div class="layui-input-inline">
+                    <input type="text" placeholder="请输入作者" autocomplete="off" class="layui-input" name="author" value="" />
+                </div>
+                <label class="layui-form-label">机构</label>
+                <div class="layui-input-inline">
+                    <input type="text" placeholder="请输入机构" autocomplete="off" class="layui-input" name="agency" value="" />
+                </div>
+                <label class="layui-form-label">案例研究所</label>
+                <div class="layui-input-inline">
+                    <input type="text" placeholder="请输入研究所名称" autocomplete="off" class="layui-input" name="research" value="" />
+                </div>
+            </div>
+            <div class="layui-upload" id="MainPics">
+                <label class="layui-form-label"><span class="x-red">*</span>主图</label>
+                <input type="text" id="ImgUrl" name="MainPic" style="display:none" lay-verify="required" placeholder="请上传图片" autocomplete="off" class="layui-input" value="" />
+                <div class="layui-input-inline">
+                    <img id="demo1" src="" class="layui-upload-img" style="width:320px; height:213px" />
+                    <button type="button" class="layui-btn " id="UploadImg">
+                        <i class="layui-icon">&#xe67c;</i>上传图片
+                    </button>
+                </div>
+            </div>
+            <div class="layui-form-item" style="margin-top:15px">
+                <label class="layui-form-label"><span class="x-red">*</span>案例内容</label>
+                <div class="layui-input-block" style="height:600px;width:1024px">
+                    <textarea id="contents" name="casecont" style="height:500px"></textarea>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+        var editor = new baidu.editor.ui.Editor();
+        editor.render('contents');
+        layui.use(['form', 'layer','layedit','upload'], function () {
+            var form = layui.form, layer = layui.layer, layedit = layui.layedit, upload = layui.upload;
+            upload.render({
+                elem: '#UploadImg',
+                url: '/back/Case/UploadPhoto',
+                done: function (res, index, upload) {
+                    var item = this.item;
+                    if (res.success) {
+                        $("#ImgUrl").val(res.remark);
+                        $("#demo1").attr("src", "/" + res.remark);
+                        layer.msg("上传成功");
+                    }
+                    else
+                        layer.msg("上传失败:" + res.message);
+                }
+            });
+            form.on("submit(add)", function () {
+                layer.confirm("是否确认添加", function (index) {
+                    $.post("/back/Case/AddCase", $("#forms").serialize(), function (res) {
+                        if (res.success) {
+                            layer.msg("添加成功", { icon: 1, time: 2000 });
+                        } else {
+                            layer.msg("添加失败："+res.message, {icon:2,time:2000});
+                        }
+                    }, "json");
+                });
+            });
+        });
+    </script>
+</body>
+</html>

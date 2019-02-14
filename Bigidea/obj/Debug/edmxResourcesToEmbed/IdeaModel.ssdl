@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bigideaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Advices">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Subhead" Type="varchar" MaxLength="100" />
+    <Property Name="PicUrl" Type="varchar" MaxLength="50" />
+    <Property Name="Daoyan" Type="varchar" MaxLength="500" />
+    <Property Name="CoverStory" Type="varchar" MaxLength="500" />
+    <Property Name="Dinting" Type="varchar" MaxLength="500" />
+    <Property Name="Snakes" Type="varchar" MaxLength="500" />
+    <Property Name="Arbitrary" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tags" Type="varchar" MaxLength="50" />
+    <Property Name="Trade" Type="varchar" MaxLength="50" />
+    <Property Name="Area" Type="varchar" MaxLength="50" />
+    <Property Name="Type" Type="varchar" MaxLength="20" />
+    <Property Name="Media" Type="varchar" MaxLength="20" />
+    <Property Name="Author" Type="varchar" MaxLength="20" />
+    <Property Name="Agency" Type="varchar" MaxLength="50" />
+    <Property Name="MainPicUrl" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="Cont" Type="varchar" MaxLength="8000" Nullable="false" />
+    <Property Name="Research" Type="varchar" MaxLength="20" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="PubTime" Type="datetime" />
+    <Property Name="ReadTimes" Type="int" />
+  </EntityType>
+  <EntityType Name="Collect">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ArticleId" Type="int" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ArticleId" Type="int" />
+    <Property Name="Cont" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="CommentTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Photos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PicUrl" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ArticleId" Type="int" />
+  </EntityType>
+  <EntityType Name="Radios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RadioUrl" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cont" Type="varchar" MaxLength="50" />
+    <Property Name="ArticleId" Type="int" />
+  </EntityType>
+  <EntityType Name="ReArticle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ArticleId" Type="int" Nullable="false" />
+    <Property Name="PosId" Type="int" />
+    <Property Name="Weight" Type="int" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Note" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="RoleGive">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="RoleId" Type="int" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Passward" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Sex" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="NickName" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="HeadSculpture" Type="varchar" MaxLength="50" />
+    <Property Name="SelfSInfo" Type="varchar" MaxLength="100" />
+    <Property Name="HeadPicUrl" Type="varchar" MaxLength="100" />
+    <Property Name="Email" Type="varchar" MaxLength="40" />
+    <Property Name="LastLoginTime" Type="datetime" />
+    <Property Name="IsDel" Type="char" MaxLength="1" />
+    <Property Name="IsStop" Type="char" MaxLength="2" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“bigidea.dbo.View_Collect”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="View_Collect">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="MainPicUrl" />
+      <PropertyRef Name="ArticleId" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Author" Type="varchar" MaxLength="20" />
+    <Property Name="Agency" Type="varchar" MaxLength="50" />
+    <Property Name="MainPicUrl" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="ReadTimes" Type="int" />
+    <Property Name="ArticleId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“bigidea.dbo.View_Comment”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="View_Comment">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="comId" />
+      <PropertyRef Name="Cont" />
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="comId" Type="int" Nullable="false" />
+    <Property Name="Cont" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="CommentTime" Type="datetime" />
+    <Property Name="HeadPicUrl" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“bigidea.dbo.View_Rec”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="View_Rec">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="MainPicUrl" />
+    </Key>
+    <Property Name="PosId" Type="int" />
+    <Property Name="Weight" Type="int" />
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MainPicUrl" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="Author" Type="varchar" MaxLength="20" />
+    <Property Name="Agency" Type="varchar" MaxLength="50" />
+    <Property Name="ReadTimes" Type="int" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“bigidea.dbo.View_User”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="View_User">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="RoleName" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Note" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK__Collect__Article__21B6055D">
+    <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+    <End Role="Collect" Type="Self.Collect" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Collect">
+        <PropertyRef Name="ArticleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Collect__UserId__22AA2996">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Collect" Type="Self.Collect" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Collect">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comment__Article__1BFD2C07">
+    <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="ArticleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comment__UserId__1CF15040">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Photos__ArticleI__0EA330E9">
+    <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+    <End Role="Photos" Type="Self.Photos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Photos">
+        <PropertyRef Name="ArticleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Radios__ArticleI__1367E606">
+    <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+    <End Role="Radios" Type="Self.Radios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Radios">
+        <PropertyRef Name="ArticleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RoleGive__RoleId__276EDEB3">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="RoleGive" Type="Self.RoleGive" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RoleGive">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RoleGive__UserId__286302EC">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="RoleGive" Type="Self.RoleGive" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RoleGive">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="bigideaModelStoreContainer">
+    <EntitySet Name="Advices" EntityType="Self.Advices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Collect" EntityType="Self.Collect" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Photos" EntityType="Self.Photos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Radios" EntityType="Self.Radios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReArticle" EntityType="Self.ReArticle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoleGive" EntityType="Self.RoleGive" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="View_Collect" EntityType="Self.View_Collect" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Collect].[Id] AS [Id], 
+    [View_Collect].[Title] AS [Title], 
+    [View_Collect].[UserName] AS [UserName], 
+    [View_Collect].[Author] AS [Author], 
+    [View_Collect].[Agency] AS [Agency], 
+    [View_Collect].[MainPicUrl] AS [MainPicUrl], 
+    [View_Collect].[ReadTimes] AS [ReadTimes], 
+    [View_Collect].[ArticleId] AS [ArticleId]
+    FROM [dbo].[View_Collect] AS [View_Collect]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_Comment" EntityType="Self.View_Comment" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Comment].[Id] AS [Id], 
+    [View_Comment].[Title] AS [Title], 
+    [View_Comment].[comId] AS [comId], 
+    [View_Comment].[Cont] AS [Cont], 
+    [View_Comment].[UserName] AS [UserName], 
+    [View_Comment].[CommentTime] AS [CommentTime], 
+    [View_Comment].[HeadPicUrl] AS [HeadPicUrl]
+    FROM [dbo].[View_Comment] AS [View_Comment]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_Rec" EntityType="Self.View_Rec" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Rec].[PosId] AS [PosId], 
+    [View_Rec].[Weight] AS [Weight], 
+    [View_Rec].[Id] AS [Id], 
+    [View_Rec].[Title] AS [Title], 
+    [View_Rec].[MainPicUrl] AS [MainPicUrl], 
+    [View_Rec].[Author] AS [Author], 
+    [View_Rec].[Agency] AS [Agency], 
+    [View_Rec].[ReadTimes] AS [ReadTimes]
+    FROM [dbo].[View_Rec] AS [View_Rec]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_User" EntityType="Self.View_User" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_User].[Id] AS [Id], 
+    [View_User].[UserName] AS [UserName], 
+    [View_User].[RoleName] AS [RoleName], 
+    [View_User].[Note] AS [Note]
+    FROM [dbo].[View_User] AS [View_User]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Collect__Article__21B6055D" Association="Self.FK__Collect__Article__21B6055D">
+      <End Role="Article" EntitySet="Article" />
+      <End Role="Collect" EntitySet="Collect" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Collect__UserId__22AA2996" Association="Self.FK__Collect__UserId__22AA2996">
+      <End Role="User" EntitySet="User" />
+      <End Role="Collect" EntitySet="Collect" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comment__Article__1BFD2C07" Association="Self.FK__Comment__Article__1BFD2C07">
+      <End Role="Article" EntitySet="Article" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comment__UserId__1CF15040" Association="Self.FK__Comment__UserId__1CF15040">
+      <End Role="User" EntitySet="User" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Photos__ArticleI__0EA330E9" Association="Self.FK__Photos__ArticleI__0EA330E9">
+      <End Role="Article" EntitySet="Article" />
+      <End Role="Photos" EntitySet="Photos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Radios__ArticleI__1367E606" Association="Self.FK__Radios__ArticleI__1367E606">
+      <End Role="Article" EntitySet="Article" />
+      <End Role="Radios" EntitySet="Radios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RoleGive__RoleId__276EDEB3" Association="Self.FK__RoleGive__RoleId__276EDEB3">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="RoleGive" EntitySet="RoleGive" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RoleGive__UserId__286302EC" Association="Self.FK__RoleGive__UserId__286302EC">
+      <End Role="User" EntitySet="User" />
+      <End Role="RoleGive" EntitySet="RoleGive" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

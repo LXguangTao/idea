@@ -1,0 +1,131 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CommentList</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="~/css/font.css">
+    <link rel="stylesheet" href="~/css/xadmin.css">
+    <script src="~/scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="~/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="~/js/xadmin.js"></script>
+    <script src="~/js/tool.js"></script>
+</head>
+<body>
+    <div class="x-body">
+        <div class="demoTable" style="margin:15px">
+            <form class="layui-form" onsubmit="return false;" id="x-form">
+                用户名：
+                <div class="layui-inline">
+                    <input class="layui-input" name="title" placeholder="请输入用户名" id="usernames" autocomplete="off">
+                </div>
+                <button class="layui-btn" data-type="reload" id="search">搜索</button>
+            </form>
+        </div>
+        <table class="layui-table" lay-filter="tabs" id="tableList"></table>
+    </div>
+    <!--头部工具栏-->
+    <script type="text/html" id="toolbarDemo">
+        <button class="layui-btn layui-btn-danger" lay-event="delAll"><i class="layui-icon"></i>批量删除</button>
+    </script>
+    <!--行内工具栏-->
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+    </script>
+    <script type="text/javascript">
+        //获取地址栏id
+        var username = decodeURI(getQueryString("username"));
+        username = username == "null" ? "" : username;
+        layui.use(['form', 'layer', 'table'], function () {
+            var form = layui.form, table = layui.table, layer = layui.layer;
+            //表格头
+            table.render({
+                elem: '#tableList'
+                , id: 'testReload'
+                , height: 520
+                , url: '/back/collect/collectlists'
+                , where: {username:username}
+                , toolbar: '#toolbarDemo'
+                , method: 'post'
+                , cols: [[ //表头
+                { type: 'checkbox' }
+                , { field: 'Id', title: 'Id', width: 50, sort: true }
+                , { field: 'Title', title: '案例标题', width: 500 }
+                , { field: 'right', align: 'left', title: '操作', toolbar: '#barDemo' }
+                ]]
+            });
+            //重载
+            $('.demoTable .layui-btn').on('click', function () {
+                var type = $(this).data('type');
+                //执行重载
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                  , where: {
+                      username: $("#usernames").val()
+                  }
+                });
+            });
+            //行内工具栏
+            table.on('tool(tabs)', function (obj) {
+                var data = obj.data;
+                var layEvent = obj.event;
+                if (layEvent === 'del') {//删除当前行
+                    layer.confirm('真的删除行么', function (index) {
+                        //向服务端发送删除指令
+                        $.post("/Back/Collect/DelCollect", { id: data.Id }, function (res) {
+                            if (res.success) {
+                                obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                layer.close(index);
+                                layer.msg("删除成功", { time: 2000, icon: 6 });
+                            } else {
+                                layer.msg("删除失败:" + res.message, { icon: 5 });
+                            }
+                        }, "json");
+                    });
+                }
+            });
+            //头部工具栏
+            table.on('toolbar(tabs)', function (obj) {
+                var checkStatus = table.checkStatus(obj.config.id);
+                switch(obj.event)
+                {
+                    case 'delAll'://批量删除
+                        var data = checkStatus.data;
+                        if (checkStatus.data.length == 0) {
+                            layer.msg('请先选择要删除的数据行！', { icon: 2 });
+                            return;
+                        }
+                        layer.confirm('真的删除行么', function (index) {
+                            var ids = "";
+                            for (var i = 0; i < checkStatus.data.length; i++) {
+                                ids += checkStatus.data[i].Id + " ";
+                            }
+                            layer.close(index);
+                            layer.msg('删除中...', { icon: 16, time: 5000 });
+                            $.post('/Back/Comment/DelComment',
+                                    { id: ids },
+                                    function (res) {
+                                        if (res.success) {
+                                            layer.msg("删除成功", { time: 2000, icon: 6 });
+                                            location.reload(true);
+                                        } else {
+                                            layer.msg("删除失败" + res.message, { icon: 5 });
+                                        }
+                                    }
+                            );
+                        });
+                        break;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

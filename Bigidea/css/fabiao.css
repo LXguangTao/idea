@@ -1,0 +1,103 @@
+﻿*{margin:0;padding: 0;}
+		.wrap{
+			width:780px;
+			height: 600px;
+			margin:0 auto;
+			border-radius: 2px;
+			padding: 10px;
+			position: relative;
+			top: 50px;
+		}
+		.says{
+			width:780px;
+			height: 200px;
+ 			position: absolute;
+		}
+		.says h1{
+			font-size:18px;
+			color:#A8A8A8;
+			margin-bottom: 5px;
+		}
+		textarea{
+			width:760px;
+			height: 100px;
+			outline: none;
+			resize: none;
+			border:1px solid #ccc;
+			border-radius: 3px;
+			padding: 5px;
+			color:#660000;
+		}
+		#fabu{
+			width:100px;
+			height: 30px;
+			border:none;
+			cursor: pointer;
+			background: #00CC66;
+			color:white;
+			border-radius: 2px;
+			position: absolute;
+			right: 10px;
+			bottom: 5px;
+			transition: all ease 0.4s;
+			font-size: 16px;
+		}
+		#fabu:hover{
+			filter:alpha(opaciyt:70);
+			opacity: 0.7;
+		}
+		#pinglun{
+			width:780px;
+			height: 300px;
+			bottom: 0;
+			overflow-x: hidden;
+			overflow: scroll;
+
+ 		}
+		#pinglun>ul>li{
+			width:780px;
+			list-style:none;
+			line-height: 57px;
+			font-size: 14px;
+			color:#606060;
+			overflow: hidden;
+			filter: alpha(opacity:0);
+			opacity: 0;
+
+		}
+        #pinglun>ul>.li{
+			width:780px;
+ 			border-bottom: 1px  dotted #ccc;
+			list-style:none;
+			line-height: 57px;
+			font-size: 14px;
+			color:#606060;
+			overflow: hidden;
+			filter: alpha(opacity:0);
+			opacity: 0;
+
+		}
+		#pinglun .span{
+			float: right;
+			margin-right: 30px;
+		}
+		.errmsg{
+			font-size: 14px;
+			color:red;
+			font-weight: bold;
+			filter: alpha(opacity:0);
+			opacity:0;
+ 		}
+ 		#pinglun a{
+ 			font-size: 14px;
+ 			color:#990000;
+ 			text-decoration: none;
+ 			margin-left: 10px;
+ 		}
+ 		#pinglun a:hover{
+ 			color:red;
+ 			text-decoration: underline;
+ 		}
+        .dl{
+             color:yellow;
+         }
